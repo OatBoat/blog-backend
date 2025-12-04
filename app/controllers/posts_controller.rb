@@ -1,4 +1,13 @@
 class PostsController < ApplicationController
+
+
+# Run authenticate_user for every action except the index action
+before_action :authenticate_user, except: [:index]
+
+# Or run authenticate_user before only specific actions
+# before_action :authenticate_user, only: [:show]
+
+
   def index
     posts = Post.all.order(:id)
     render json: posts
@@ -9,6 +18,7 @@ class PostsController < ApplicationController
       title: params[:title],
       body: params[:body],
       image: params[:image],
+      user_id: current_user.id
     )
     if post.save
       render json: post
@@ -27,6 +37,7 @@ class PostsController < ApplicationController
     post.title = params[:title] || post.title
     post.body = params[:body] || post.body
     post.image = params[:image] || post.image
+    
     if post.save
       render json: post
     else

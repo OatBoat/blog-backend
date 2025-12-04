@@ -1,16 +1,15 @@
 class UsersController < ApplicationController
   def create
-    post = Post.new(
-      user: params[:user],
+    user = User.new(
       name: params[:name],
       email: params[:email],
       password: params[:password],
       password_confirmation: params[:password_confirmation],
     )
-    if post.save
-      render json: post
+    if user.save
+      render json: user
     else
-      render json: { errors: post.errors.full_messages }, status: :bad_request
+      render json: { errors: user.errors.full_messages }, status: :bad_request
     end
   end
 end
