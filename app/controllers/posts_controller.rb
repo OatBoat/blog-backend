@@ -2,7 +2,8 @@ class PostsController < ApplicationController
 
 
 # Run authenticate_user for every action except the index action
-before_action :authenticate_user, except: [:index]
+before_action :authenticate_user, except: [:index, :show]
+before_action :authenticate_admin, only: [:update, :destroy]
 
 # Or run authenticate_user before only specific actions
 # before_action :authenticate_user, only: [:show]
@@ -14,17 +15,17 @@ before_action :authenticate_user, except: [:index]
   end
 
   def create
-    post = Post.new(
-      title: params[:title],
-      body: params[:body],
-      image: params[:image],
-      user_id: current_user.id
-    )
-    if post.save
-      render json: post
-    else
-      render json: { errors: post.errors.full_messages }, status: :bad_request
-    end
+      post = Post.new(
+        title: params[:title],
+        body: params[:body],
+        image: params[:image],
+        user_id: current_user.id
+      )
+      if post.save
+        render json: post
+      else
+        render json: { errors: post.errors.full_messages }, status: :bad_request
+      end
   end
 
   def show

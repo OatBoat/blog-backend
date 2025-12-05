@@ -14,8 +14,17 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_user
+    puts "-------------"
+    pp current_user
+    puts "-------------"
     unless current_user
       render json: {}, status: :unauthorized
+    end
+  end
+
+  def authenticate_admin
+    unless current_user && current_user.admin
+      render json: {error: "Unauthorized - must be a big-pimpin"}
     end
   end
 end

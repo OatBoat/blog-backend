@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by(email: params[:email])
     if user && user.authenticate(params[:password])
-      cookie = {vaule: user.id}
+      cookie = {value: user.id}
       cookies.signed[:user_id] = cookie.merge(cookie_settings)
       render json: {email: user.email, user_id: user.id}, status: :created
     else
