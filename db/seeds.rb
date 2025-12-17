@@ -12,7 +12,7 @@
 # db/seeds.rb
 
 # Clear existing data (optional - useful for resetting)
-Recipe.destroy_all
+Post.destroy_all
 User.destroy_all
 
 # --- Users ---
@@ -45,19 +45,19 @@ puts "Users created!"
 puts "Creating posts..."
 
 posts = [
-  { title: "Chamorro Red Rice", body: "Chef Juan", img: 1 },
-  { title: "Garlic Butter Shrimp", body: "Chef Maria", img: 2 },
-  { title: "Beef Tinaktak", body: "Chef Tony", img: 3 },
-  { title: "Chicken Kelaguen", body: "Chef Lina", img: 4 },
-  { title: "BBQ Short Ribs", body: "Chef Ray", img: 5 },
-  { title: "Lumpia", body: "Chef Ann", img: 6 }
+  { title: "Chamorro Red Rice", body: "Chef Juan", image: 1 },
+  { title: "Garlic Butter Shrimp", body: "Chef Maria", image: 2 },
+  { title: "Beef Tinaktak", body: "Chef Tony", image: 3 },
+  { title: "Chicken Kelaguen", body: "Chef Lina", image: 4 },
+  { title: "BBQ Short Ribs", body: "Chef Ray", image: 5 },
+  { title: "Lumpia", body: "Chef Ann", image: 6 }
 ]
 
-posts.each do |posts_data|
+posts.each do |post_data|
   Post.create!(
     title: post_data[:title],
-    chef: post_data[:chef],
-    image_url: "https://picsum.photos/640/480?random=#{post_data[:img]}",
+    body: post_data[:body],
+    image: "https://picsum.photos/640/480?random=#{post_data[:image]}",
     user: [admin, user1, user2].sample  # randomly assign an owner
   )
 end
