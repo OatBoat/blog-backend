@@ -3,7 +3,9 @@ class PostsController < ApplicationController
 
 # Run authenticate_user for every action except the index action
 before_action :authenticate_user, except: [:index, :show]
-before_action :authenticate_admin, only: [:update, :destroy]
+#before_action :authenticate_admin, only: [:update, :destroy]
+before_action :authorize_post_owner, only: [:update, :destroy]
+
 
 # Or run authenticate_user before only specific actions
 # before_action :authenticate_user, only: [:show]

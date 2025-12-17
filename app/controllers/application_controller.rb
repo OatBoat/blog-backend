@@ -27,4 +27,11 @@ class ApplicationController < ActionController::Base
       render json: {error: "Unauthorized - must be a big-pimpin"}
     end
   end
+
+  def authorize_post_owner
+    post = Post.find(params[:id])
+    unless current_user.admin || post.user_id == current_user.id
+      render json: {error: "Unauthorized - not your cheese pimpin"}
+    end
+  end
 end
