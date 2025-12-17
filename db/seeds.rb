@@ -57,10 +57,10 @@ posts.each do |posts_data|
   Post.create!(
     title: post_data[:title],
     chef: post_data[:chef],
-    image_url: "https://picsum.photos/640/480?random=#{recipe_data[:img]}",
+    image_url: "https://picsum.photos/640/480?random=#{post_data[:img]}",
     user: [admin, user1, user2].sample  # randomly assign an owner
   )
 end
 
-puts "Recipes created!"
+puts "Posts created!"
 puts "Seeding complete!"
